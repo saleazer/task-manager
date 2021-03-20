@@ -4,9 +4,9 @@ const User = require('../models/user')
 const auth = require('../middleware/auth.js')
 
 //Test GET route
-router.get("/test", (req,res) =>{
-    res.send("From a new file")
-})
+// router.get("/test", (req,res) =>{
+//     res.send("From a new file")
+// })
 
 // POST to add new user
 router.post("/users", async (req, res) => {
@@ -20,7 +20,7 @@ router.post("/users", async (req, res) => {
     }
 })
 
-//POST to login user
+// POST to log in user
 router.post("/users/login", async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
@@ -31,6 +31,12 @@ router.post("/users/login", async (req, res) => {
         res.status(400).send(e)
     }
 })
+
+// POST to log out user
+router.post("/users/logout", auth, async (req, res) => {
+
+})
+
 
 // GET to return user 
 router.get("/users/me", auth, async (req, res) => {

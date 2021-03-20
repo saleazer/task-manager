@@ -67,17 +67,13 @@ userSchema.methods.generateAuthToken = async function () {
 // 'Statics' are methods usable on the model itself
 userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({ email })
-
     if(!user) {
        throw new Error("No match returned") 
     }
-
     const isMatch = await bcrypt.compare(password, user.password)
-
     if (!isMatch) {
         throw new Error("Password doesn't match")
     }
-
     return user
 }
 
